@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import bgimg from "../assets/authBg.png";
+import { TbMoodLookLeft } from "react-icons/tb";
+import { TbMoodLookRight } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const Signin = () => {
+  const [showpassword, setshowpassword] = useState(false);
+  const [email , setemail]= useState("");
+  const [password , setpassword]= useState("");
+
+   const handlesignin=()=> async {
+         const 
+    const result=await axios.post("serverurl/user/signin" , {email , })
+   }
+
+  const navigate = useNavigate();
+  return (
+    <div
+      className="w-full h-[100vh] bg-cover flex justify-center items-center"
+      style={{ backgroundImage: `url(${bgimg})` }}
+    >
+      <form
+        className="w-[90%] h-[600px] max-w-[500px] backdrop-blur-sm flex items-center justify-center gap-[20px] bg-[#00000069] flex-col shadow-2xl shadow-black"
+        action="/user/signup"
+        type="post"
+      >
+        <h1 className="text-white text-[28px] font-semibold mb-[32px]">
+          Signin to <span className="text-blue-400">Virtual Assistant</span>{" "}
+        </h1>
+
+        <input
+          className="text-white w-[80%] border-2 p-[17px] rounded-3xl text-[15px]"
+          type="email"
+          placeholder="Enter your email"
+          onChange={(e)=>{setemail(e.target.value)}}
+        />
+        <div className="text-white w-[80%] rounded-3xl flex items-center justify-center border-2">
+          <input
+            className="p-[17px] w-[84%] rounded-3xl text-[15px] outline-0"
+            type={showpassword ? "text" : "password"}
+            placeholder="Enter Your Password"
+            onChange={(e)=>{setpassword(e.target.value)}}
+          />
+          {/* <TbMoodLookLeft /> */}
+          {showpassword ? (
+            <TbMoodLookLeft
+              className="color-white w-[15%] text-[30px] cursor-pointer"
+              onClick={() => setshowpassword(!showpassword)}
+            />
+          ) : (
+            <TbMoodLookRight
+              className="color-white w-[15%] text-[30px] cursor-pointer"
+              onClick={() => setshowpassword(!showpassword)}
+            />
+          )}
+        </div>
+
+        <button
+          className="text-[#3131e4] border-2 p-[17px] rounded-full text-[15px] bg-white cursor-pointer"
+          type="submit"
+        >
+          Sign-up
+        </button>
+        <p className="text-[15px]">
+          don't have an account?{" "}
+          <span
+            className="text-[#c2c2fa] cursor-pointer font-bold"
+            onClick={() => {
+              navigate("/user/signup");
+            }}
+          >
+            signup here
+          </span>
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Signin;

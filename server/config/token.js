@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
-async function genToken(userid , email)
+export async function genToken(userid , email)
 {
-   const token=await jwt.sign({userid , email} , process.env.user_jwt_sectet , {expiresIn:"30d"});
+   const token=await jwt.sign({userid , email} , process.env.user_jwt_secret , {expiresIn:"30d"});
    return token;
 }
-export default genToken;
+// export default {genToken};

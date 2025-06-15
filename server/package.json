@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "chalu":"node index.js",
     "start": "nodemon index.js",
+    "chalu":"node index.js",
     "dev": "nodemon index.js"
     },
   "author": "tuhsar verma",

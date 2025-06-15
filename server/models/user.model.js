@@ -15,5 +15,4 @@ const userSchema = new mongoose.Schema({
 
 const userModel = mongoose.model('User', userSchema); // document name is User  (inside mongodb)
 
-module.exports={userModel};
-  
+export default userModel;  
