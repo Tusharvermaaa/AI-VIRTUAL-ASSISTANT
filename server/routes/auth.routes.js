@@ -14,7 +14,7 @@ auth_router
     res.send({ message: "hi from user routes for sign up ejs functinaity " })
   );
 
-auth_router.route("/login").post(login_auth);
+auth_router.route("/signin").post(login_auth);
 
 auth_router.route("/logout").get(logout_auth);
 
