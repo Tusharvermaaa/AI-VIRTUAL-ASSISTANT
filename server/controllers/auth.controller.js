@@ -15,12 +15,13 @@ export async function signup_auth(req, res)
     const hashedpassword= await bcrypt.hash(password,Number( process.env.SALT));
     const createduser=await userModel.create({name , password:hashedpassword, email});
 
-   const token=genToken(createduser.id , email);
-   
+   const token=genToken(createduser._id );
+   console.log("token created at authentication and type " , token , typeof token)
+    console.log("created user id , in signup .jsx in controller " , createduser._id);
    res.cookie("token" , token , {
     sameSite:"strict" , 
     secure: false, 
-    httponly:true,
+    httpOnly:true,
     maxAge:4*24*60*60*1000
    })
    return res.status(201).send(createduser);
@@ -52,7 +53,7 @@ export async function login_auth(req, res) {
         }
 
         console.log("generating token");
-        const token = genToken(user.id, email);
+        const token = genToken(user._id, email);
         
         // Set cookie
         res.cookie("token", token, {

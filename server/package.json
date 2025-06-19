@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "chalu":"node index.js",
+    "chalu": "node index.js",
     "dev": "nodemon index.js"
-    },
+  },
   "author": "tuhsar verma",
   "license": "ISC",
   "description": "",
