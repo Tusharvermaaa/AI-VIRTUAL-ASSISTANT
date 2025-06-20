@@ -14,13 +14,15 @@ const Signup = () => {
         const [email ,setemail]=useState("");
         const [password , setpassword]=useState("");
         const [password2 , setpassword2]=useState("");
-        const {serverurl}=useContext(userdatacontext);
+        const {serverurl , userdata , setuserdata}=useContext(userdatacontext);
 
         const  handlesignup= async (e)=>{
             e.preventDefault();
             console.log(serverurl);
             if(password!=password2) navigate("/user/signup");
             const result=await axios.post(`${serverurl}/user/signup`,{email, password, name} , {withCredentials:true});
+            setuserdata(result.data);
+            navigate("/customize");
             console.log(result , " from signup .jsx");
 
          }
@@ -96,7 +98,7 @@ const Signup = () => {
         >
           Register
         </button>
-        <p>already have an account ?<span onClick={()=>{navigate("/user/signin")}} className="text-[#c2c2fa] text-xl">signin here</span></p>
+        <p>already have an account ?<span onClick={()=>{navigate("/signin")}} className="text-[#c2c2fa] text-xl">signin here</span></p>
       </form>
     </div>
   );

@@ -12,7 +12,7 @@ const Signin = () => {
   const [showpassword, setshowpassword] = useState(false);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const { serverurl } = useContext(userdatacontext);
+  const { serverurl , userdata, setuserdata } = useContext(userdatacontext);
   //    const handlesignin=()=> async {
   async function handlesignin(e) {
     e.preventDefault();
@@ -23,6 +23,8 @@ const Signin = () => {
       { email, password },
       { withCredentials: true }
     );
+    setuserdata(result.data);
+    navigate("/")
     console.log(result," is this result , hello rosult boy ");
   }
 
@@ -84,7 +86,7 @@ const Signin = () => {
           <span
             className="text-[#c2c2fa] cursor-pointer font-bold"
             onClick={() => {
-              navigate("/user/signup");
+              navigate("/signup");
             }}
           >
             signup here

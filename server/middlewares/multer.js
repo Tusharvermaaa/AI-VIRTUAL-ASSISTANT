@@ -6,6 +6,6 @@ const storage=multer.diskStorage({
     filename:(req, file , cc)=>{
         cb(null, file.originalname)
     }
-})
+});
 const upload=multer({storage});
 export default upload;
