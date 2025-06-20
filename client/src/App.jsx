@@ -5,20 +5,24 @@ import Signin from "./pages/Signin.jsx";
 import Customize from "./pages/Customize";
 import Customize2 from "./pages/Customize2";
 import { userdatacontext } from "./context/usercontext";
+import Home from "./pages/Home.jsx";
 
 function App() {
-  const { userdata , selectedimg } = useContext(userdatacontext);
+  const { userdata , selectedimg  ,selectedname} = useContext(userdatacontext);
   return (
     <Routes>
       <Route
         path="/"
         element={
-          userdata?.assistantimg && userdata?.assistantname ? (
-            <Home />
-          ) : (
-            <Navigate to={"/customize"} />
-          )
+         userdata &&  selectedimg && selectedname ? <Home/> : !userdata? <Navigate to={"/signin"}/> : <Navigate to={"/customize"}/>
         }
+        // element={
+        //   userdata?.assistantimg && userdata?.assistantname ? (
+        //     <Home />
+        //   ) : (
+        //     <Navigate to={"/customize"} />
+        //   )
+        // }
       />
 
       <Route

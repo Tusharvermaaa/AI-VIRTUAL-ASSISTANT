@@ -7,6 +7,7 @@ const Usercontext = ({children}) => {
   const [selectedimg , setselectedimg]=useState(null);
    const [frontendimg ,setFrontendimg]= useState(null);
     const [backendimg ,setBackendimg]= useState(null);
+    const [selectedname ,setselectedname]= useState(null);
   const handlecurrentuser=async()=>{
     try {
       const result = await axios.get(`${value.serverurl}/current`, {withCredentials:true});
@@ -23,7 +24,8 @@ const Usercontext = ({children}) => {
   const value={
       serverurl:"http://localhost:7001", 
       userdata, setuserdata , frontendimg , setFrontendimg, backendimg , setBackendimg , 
-      selectedimg , setselectedimg
+      selectedimg , setselectedimg , 
+      selectedname , setselectedname
 
   }
   return (
