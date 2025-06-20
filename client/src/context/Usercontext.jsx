@@ -4,6 +4,9 @@ import React, { createContext, useEffect, useState  } from 'react'
 export  const userdatacontext=createContext({});
 const Usercontext = ({children}) => {
   const [userdata , setuserdata]= useState(null);
+  const [selectedimg , setselectedimg]=useState(null);
+   const [frontendimg ,setFrontendimg]= useState(null);
+    const [backendimg ,setBackendimg]= useState(null);
   const handlecurrentuser=async()=>{
     try {
       const result = await axios.get(`${value.serverurl}/current`, {withCredentials:true});
@@ -19,7 +22,9 @@ const Usercontext = ({children}) => {
   
   const value={
       serverurl:"http://localhost:7001", 
-      userdata, setuserdata
+      userdata, setuserdata , frontendimg , setFrontendimg, backendimg , setBackendimg , 
+      selectedimg , setselectedimg
+
   }
   return (
     <div>
