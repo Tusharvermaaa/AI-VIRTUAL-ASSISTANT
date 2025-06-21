@@ -23,6 +23,8 @@ function Customize() {
     const file = e.target.files[0];
     setBackendimg(file);
     setFrontendimg(URL.createObjectURL(file));
+    console.log(file);
+    console.log(URL.createObjectURL(file));
   };
   return (
     <div className="w-full h-[110vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
@@ -38,6 +40,7 @@ function Customize() {
         <Card image={img5} />
         <Card image={img6} />
         {/* <Cardtaker/> */}
+
         <div
           onClick={() => {
             inputImg.current.click();
@@ -73,7 +76,7 @@ function Customize() {
       {
         (selectedimg )&& (
           <input
-           onClick={()=>{navigate("/customize2")}}
+           onClick={()=>{   navigate("/customize2")}}
             type="button"
             className="cursor-pointer font-bold text-[20px] bg-amber-50 rounded-full text-[#06063e] m-[50px] p-[20px] pt-[10px] pb-[10px] hover:shadow-2xl hover:shadow-blue-500 "
             value="Next"

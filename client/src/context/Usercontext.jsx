@@ -8,19 +8,21 @@ const Usercontext = ({children}) => {
    const [frontendimg ,setFrontendimg]= useState(null);
     const [backendimg ,setBackendimg]= useState(null);
     const [selectedname ,setselectedname]= useState(null);
-  const handlecurrentuser=async()=>{
-    try {
-      const result = await axios.get(`${value.serverurl}/current`, {withCredentials:true});
-      setuserdata(result.data);
-      console.log(userdata);
-    }catch (error) {
-      console.log("error in handlecurrentuser , "  , error)
+    
+    const handlecurrentuser=async()=>{
+      try {
+        const result = await axios.get(`${value.serverurl}/current`, {withCredentials:true});
+        setuserdata(result.data);
+        console.log(userdata);
+      }catch (error) {
+        console.log("error in handlecurrentuser , "  , error)
+      }
     }
-  }
-  useEffect(()=>{
-    handlecurrentuser();
-  }, [])
-  
+    useEffect(()=>{
+      handlecurrentuser();
+    }, [])
+
+    
   const value={
       serverurl:"http://localhost:7001", 
       userdata, setuserdata , frontendimg , setFrontendimg, backendimg , setBackendimg , 
