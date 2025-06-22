@@ -5,6 +5,6 @@ import upload from "../middlewares/multer.js";
 const curuserroute=express.Router();
 
 curuserroute.route("/").get(handle_current_user)
-.post(upload.single("UserAssistantimg") , uploaduserdata)
+.post(uploaduserdata).post(upload.single("userassistantfile"),uploaduserdata );
+export default curuserroute; 
 
-export default curuserroute;

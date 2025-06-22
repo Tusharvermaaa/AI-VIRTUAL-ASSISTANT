@@ -22,7 +22,7 @@ app.use(cors({
   credentials: true
 }));
 app.use((req, res, next)=>{
-  console.log(req.cookies , " are cookies in res ");
+  // console.log(req.cookies , " are cookies in res ");
   next();
 })
 app.use(express.static(path.join(__dirname, "public"))); // to configure the public folder 

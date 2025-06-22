@@ -18,12 +18,12 @@ const Signup = () => {
 
         const  handlesignup= async (e)=>{
             e.preventDefault();
-            console.log(serverurl);
+            // console.log(serverurl);
             if(password!=password2) navigate("/user/signup");
             const result=await axios.post(`${serverurl}/user/signup`,{email, password, name} , {withCredentials:true});
             setuserdata(result.data);
             navigate("/customize");
-            console.log(result , " from signup .jsx");
+            // console.log(result , " from signup .jsx");
 
          }
 

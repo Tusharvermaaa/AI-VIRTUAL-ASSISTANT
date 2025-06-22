@@ -11,26 +11,31 @@ import { useRef } from "react";
 import { useContext } from "react";
 import { userdatacontext } from "../context/usercontext";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 // import img2 from "../assets/image2.jpg"
 // import img2 from "../assets/image2.jpg"
 
 function Customize() {
+
   const { selectedimg,setselectedimg, frontendimg, setFrontendimg, setBackendimg } =
     useContext(userdatacontext);
     const navigate =useNavigate();
   const inputImg = useRef();
+  
   const handlefileinput = (e) => {
     const file = e.target.files[0];
     setBackendimg(file);
     setFrontendimg(URL.createObjectURL(file));
-    console.log(file);
-    console.log(URL.createObjectURL(file));
+    // console.log(file);
+    // console.log(URL.createObjectURL(file));
   };
+
   return (
-    <div className="w-full h-[110vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
+    <div className="w-full h-[100vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
+    <MdOutlineArrowBackIosNew className="font-bold text-2xl text-[white]  cursor-pointer absolute top-15  left-15  "  onClick={()=>navigate("/")} />
       <h1 className="text-[white] font-bold p-[5px] m-[30px] text-2xl">
         Select <span className="text-blue-400">Avatar</span> of Your{" "}
-        <span className="text-blue-400">Virtual Assistant </span>
+        <span className="text-blue-400"> Virtual Assistant </span>
       </h1>
       <div className="flex items-center justify-center flex-wrap w-[60%] gap-[19px]">
         <Card image={img1} />
@@ -39,9 +44,8 @@ function Customize() {
         <Card image={img4} />
         <Card image={img5} />
         <Card image={img6} />
-        {/* <Cardtaker/> */}
-
-        <div
+    
+      <div
           onClick={() => {
             inputImg.current.click();
             setselectedimg("input") 

@@ -13,7 +13,7 @@ const Usercontext = ({children}) => {
       try {
         const result = await axios.get(`${value.serverurl}/current`, {withCredentials:true});
         setuserdata(result.data);
-        console.log(userdata);
+        // console.log(userdata);
       }catch (error) {
         console.log("error in handlecurrentuser , "  , error)
       }

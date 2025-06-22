@@ -5,10 +5,10 @@ import {genToken} from "../config/token.js";
 
 export async function signup_auth(req, res)
 {
-    console.log("authentaication working , please be prepared ");
-    console.log(req.body , "inside signup auth controller auth.controller ");
+    // console.log("authentaication working , please be prepared ");
+    // console.log(req.body , "inside signup auth controller auth.controller ");
     const { name , password, email}=req.body;
-    console.log(req.body , " inside the authcontroller dignup functiom");
+    // console.log(req.body , " inside the authcontroller dignup functiom");
     const user=await userModel.findOne({email});
     if(user) return res.json({"status" : "user already exists in the system  auth controller "});
     if(password.length<3) return res.json({"status": "password length less then 3 auth controller"});
@@ -16,8 +16,8 @@ export async function signup_auth(req, res)
     const createduser=await userModel.create({name , password:hashedpassword, email});
 
    const token=genToken(createduser._id );
-   console.log("token created at authentication and type " , token , typeof token)
-    console.log("created user id , in signup .jsx in controller " , createduser._id);
+//    console.log("token created at authentication and type " , token , typeof token)
+    // console.log("created user id , in signup .jsx in controller " , createduser._id);
    res.cookie("token" , token , {
     sameSite:"strict" , 
     secure: false, 
@@ -29,7 +29,7 @@ export async function signup_auth(req, res)
 // login authentication
 export async function login_auth(req, res) {
     try {
-        console.log("login handling server, req.body is", req.body);
+        // console.log("login handling server, req.body is", req.body);
         const { email, password } = req.body;
         
         // Validate input
@@ -52,7 +52,7 @@ export async function login_auth(req, res) {
             return res.status(401).json({ message: "Incorrect password" });
         }
 
-        console.log("generating token");
+        // console.log("generating token");
         const token = genToken(user._id, email);
         
         // Set cookie
@@ -63,7 +63,7 @@ export async function login_auth(req, res) {
             maxAge: 4 * 24 * 60 * 60 * 1000
         });
 
-        console.log("returning the response");
+        // console.log("returning the response");
         return res.status(200).json({
             status: "Login successful",
             user: {
@@ -73,7 +73,7 @@ export async function login_auth(req, res) {
             }
         });
     } catch (error) {
-        console.error("Login error:", error);
+        console.log("Login error:", error);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -121,6 +121,7 @@ export async function logout_auth(req, res)
     try{
 
         res.clearCookie("token");
+        // return res.redirect("/signin");
         return res.status(200).send({"message": "logout successfully from auth.controller"})
     }
     catch(err)

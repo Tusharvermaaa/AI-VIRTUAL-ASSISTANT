@@ -12,11 +12,11 @@ function Card({ image, alttag }) {
  ${(selectedimg == image)
           ? "shadow-blue-900 hover:border-2 border-b-blue-400 cursor-pointer "
           : null}
-
   `}
       onClick={() => 
         {setselectedimg(image)
-        console.log(selectedimg)}
+        // console.log(selectedimg)
+        }
       }
     >
       <img

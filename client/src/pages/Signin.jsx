@@ -16,8 +16,8 @@ const Signin = () => {
   //    const handlesignin=()=> async {
   async function handlesignin(e) {
     e.preventDefault();
-    console.log()
-    console.log(serverurl)
+    // console.log()
+    // console.log(serverurl)
     const result = await axios.post(
       `${serverurl}/user/signin`,
       { email, password },
@@ -25,7 +25,7 @@ const Signin = () => {
     );
     setuserdata(result.data);
     navigate("/")
-    console.log(result," is this result , hello rosult boy ");
+    // console.log(result," is this result , hello rosult boy ");
   }
 
   return (

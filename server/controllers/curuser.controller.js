@@ -19,12 +19,13 @@ export const uploaduserdata= async(req, res)=>{
     const {selectedname , selectedimg} = req.body;
     try {
     
-        let assistantimage ;
+        let assistantimage=selectedimg ;
+        // console.log("server controller : ", req , " fileimg inside req obj is : " , req.fileimg)
         if(req.fileimg)
         {
-           assistantimage=await uploadoncloudinary(req.fileimg);
+           assistantimage=await uploadoncloudinary(req.fileimg.path);
         }
-        else assistantimage=selectedimg;
+        // else assistantimage=selectedimg;
         const myuser=await userModel.findByIdAndUpdate(req.userid,{assistantname:selectedname , assistantimage:assistantimage} , {new:true}).select("-password");
         return res.send(myuser);
         
