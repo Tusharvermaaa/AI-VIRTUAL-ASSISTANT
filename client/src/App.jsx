@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup.jsx";
 import Signin from "./pages/Signin.jsx";
@@ -8,23 +8,21 @@ import { userdatacontext } from "./context/usercontext";
 import Home from "./pages/Home.jsx";
 
 function App() {
-  const { userdata , selectedimg  ,selectedname} = useContext(userdatacontext);
+
+  const { userdata , selectedimg  , selectedname} = useContext(userdatacontext);
+  //  const [hasassistant , sethasassistant]= useState(null);
+  //  sethasassistant(userdata.assistantimage && userdata.assistantname)
+  // const hasassistant=userdata.assistantimage && userdata.assistantname;
+  
   return (
     <Routes>
+
       <Route
         path="/"
         element={
-         userdata &&  selectedimg && selectedname ? <Home/> : !userdata? <Navigate to={"/signin"}/> : <Navigate to={"/customize"}/>
+         (selectedname && selectedimg) ? <Home/> : <Navigate to={"/customize"}/>
         }
-        // element={
-        //   userdata?.assistantimg && userdata?.assistantname ? (
-        //     <Home />
-        //   ) : (
-        //     <Navigate to={"/customize"} />
-        //   )
-        // }
       />
-
       <Route
         path="/signup"
         element={!userdata ? <Signup /> : <Navigate to={"/"} />}
