@@ -22,7 +22,7 @@ Instructions:
 - If user says:  
   "Flaa please open CarryMinati on YouTube"  
   → "userinput": "carryminati", "type": "youtube_play"
-- The "response" must sound natural, like something spoken aloud by a voice assistant. Keep it concise — 1 to 3 lines maximum.
+- The "response" must sound natural, like something spoken aloud by a voice assistant. Keep it concise — 1  to 2 line maximum.
 - Output must be only the JSON. Do not include explanation, greetings, or text outside the JSON.
 
 Response examples:
@@ -45,10 +45,17 @@ Type meanings:
 - "get_day": if user asks what day it is.
 - "get_month": if user asks for the current month.
 
-Important:
+Important very very important please follow:
 - Use "${USERNAME}" if user asks "Who created you?" or similar questions.
-- Only respond with the JSON object, nothing else.
-
+- Only respond with a raw JSON object — DO NOT wrap it inside triple backticks or anything else
+- dont think that you are sending code think as of you are sending text , so dont add backtics 
+note:
+  send the response in the form 
+  { 
+    type: "whatever",
+    userinput:"whatever",
+    response:"whatever you have answered for the userinput "
+  }
 Now your userInput: ${PROMPT} , do response 
 
 `;
@@ -64,7 +71,7 @@ Now your userInput: ${PROMPT} , do response
         },
       ],
     });
-     return result.data.candidates[0].content.parts[0].text;
+     return result?.data?.candidates[0]?.content?.parts[0]?.text.trim(); // the pro line 
   } catch (error) {
     console.log(" error in gemini response ,  ", error);
   }

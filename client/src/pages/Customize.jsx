@@ -28,6 +28,7 @@ function Customize() {
     setFrontendimg(URL.createObjectURL(file));
     // console.log(file);
     // console.log(URL.createObjectURL(file));
+    // navigate("/")
   };
 
   return (
@@ -80,7 +81,7 @@ function Customize() {
       {
         (selectedimg )&& (
           <input
-           onClick={()=>{   navigate("/customize2")}}
+           onClick={()=>{ navigate("/customize2")}}
             type="button"
             className="cursor-pointer font-bold text-[20px] bg-amber-50 rounded-full text-[#06063e] m-[50px] p-[20px] pt-[10px] pb-[10px] hover:shadow-2xl hover:shadow-blue-500 "
             value="Next"

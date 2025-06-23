@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { userdatacontext } from '../context/usercontext'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import { RiLogoutCircleLine } from "react-icons/ri";
@@ -7,7 +7,9 @@ import { useNavigate  } from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
-  const {serverurl}= useContext(userdatacontext);
+  const [GeminiOutput, setGeminiOutput]= useState(null);
+  const [output , setoutput]=useState("hello");
+  const {serverurl , getTextresponse , userdata}= useContext(userdatacontext);
   const navigate= useNavigate();
   // const {selectedname , selectedimg} = useContext(userdatacontext);
    const handlelogout=async ()=> {
@@ -22,16 +24,52 @@ const Home = () => {
     }
   }
 
-   const {userdata} = useContext(userdatacontext);
-  //  console.log(userdata ,"  inside the home page ")
+  ////
+  useEffect(() => {
+    const fetchGeminiResponse = async () => {
+      const res = await getTextresponse(output);
+      if (res?.data?.response) {
+        setGeminiOutput(res.data.response); // ✅ Save the assistant's voice-style response
+      }
+    };
+
+    if (userdata) {
+      fetchGeminiResponse();
+    }
+  }, [userdata , GeminiOutput]);
+  // setting up speech recognition with webspeech api
+  
+   useEffect(()=>{
+          const SpeechRecognize=window.SpeechRecognition || window.webkitSpeechRecognition;
+          const recognition=new SpeechRecognize();
+              recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        setoutput(transcript);
+        // output.textContent = 'You said: ' + transcript;
+      };
+
+      recognition.onerror = function(event) {
+         const errormsg='Error occurred: ' + event.error;
+        //  setoutput(errormsg);
+      };
+   },[output]);
+
   return (
    <div className="w-full h-[100vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
 
              <div onClick={()=>navigate("/customize")} className="font-bold text-2xl text-[white]  cursor-pointer absolute top-15  right-15 w-[100px]" >
-      <MdOutlineArrowBackIosNew className="font-bold text-2xl text-[white] cursor-pointer "/> Customize
+      {/* <MdOutlineArrowBackIosNew className="font-bold text-2xl text-[white] cursor-pointer "/> */}
+       Customize
              </div>
              <div onClick={handlelogout } className="font-bold text-2xl text-[white]  cursor-pointer absolute top-39  right-15 w-[100px]" >
-      <RiLogoutCircleLine className="font-bold text-2xl text-[white] cursor-pointer "/> Logout
+      {/* <RiLogoutCircleLine className="font-bold text-2xl text-[white] cursor-pointer "/>  */}
+      Logout
              </div>
             {/* <MdOutlineArrowBackIosNew className="font-bold text-2xl text-[white]  cursor-pointer absolute top-15  left-15  "  onClick={()=>navigate("/customize")} /> */}
       
@@ -42,6 +80,8 @@ const Home = () => {
             className="object-cover h-full w-full min-h-[300px] "
           />
         </div>
+        <div className='text-3xl text-indigo-200 m-[23px]'>{`${GeminiOutput}`}</div>
+         <div className='text-3xl text-indigo-200 m-[23px]'>{`${output}`}</div>
     </div>
 
   )

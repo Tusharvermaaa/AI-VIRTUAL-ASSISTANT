@@ -22,7 +22,7 @@ const Signup = () => {
             if(password!=password2) navigate("/user/signup");
             const result=await axios.post(`${serverurl}/user/signup`,{email, password, name} , {withCredentials:true});
             setuserdata(result.data);
-            navigate("/customize");
+            navigate("/");
             // console.log(result , " from signup .jsx");
 
          }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup.jsx";
 import Signin from "./pages/Signin.jsx";
@@ -9,10 +9,10 @@ import Home from "./pages/Home.jsx";
 
 function App() {
 
-  const { userdata , selectedimg  , selectedname} = useContext(userdatacontext);
+  const { userdata , selectedimage } = useContext(userdatacontext);
   //  const [hasassistant , sethasassistant]= useState(null);
   //  sethasassistant(userdata.assistantimage && userdata.assistantname)
-  // const hasassistant=userdata.assistantimage && userdata.assistantname;
+  // const hasassistant=userdata?.assistantimage && userdata?.assistantname;
   
   return (
     <Routes>
@@ -20,7 +20,7 @@ function App() {
       <Route
         path="/"
         element={
-         (selectedname && selectedimg) ? <Home/> : <Navigate to={"/customize"}/>
+         (userdata?.assistantimage && userdata?.assistantname) ? <Home/> : <Navigate to={"/customize"}/>
         }
       />
       <Route
@@ -29,15 +29,15 @@ function App() {
       />
       <Route
         path="/signin"
-        element={!userdata ? <Signin /> : <Navigate to={"/customize"} />}
+        element={!userdata ? <Signin /> : <Navigate to={"/"}/>}
       />
       <Route
         path="/customize"
-        element={userdata ? <Customize /> : <Navigate to={"/signin"} />}
+        element={userdata? <Customize/>: <Navigate to={"/signin"}/>  }
       />
       <Route
         path="/customize2"
-        element={selectedimg ? <Customize2/> : <Navigate to={"/signin"} />}
+        element={userdata ? <Customize2/> : <Navigate to={"/signin"} />}
       />
     </Routes>
   );

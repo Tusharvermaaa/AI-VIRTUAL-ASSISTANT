@@ -15,16 +15,16 @@ const Signin = () => {
   const { serverurl , setuserdata } = useContext(userdatacontext);
   //    const handlesignin=()=> async {
   async function handlesignin(e) {
+
     e.preventDefault();
-    // console.log()
-    // console.log(serverurl)
     const result = await axios.post(
       `${serverurl}/user/signin`,
       { email, password },
       { withCredentials: true }
     );
     setuserdata(result.data);
-    navigate("/")
+    navigate("/");
+    
     // console.log(result," is this result , hello rosult boy ");
   }
 
