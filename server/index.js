@@ -1,5 +1,7 @@
 import express from 'express';
 import path from "path"
+import session from "express-session";
+
 import dotenv from 'dotenv';
 import {connectdb}  from './config/databaseconfig.js';
 import cookieParser from "cookie-parser";
