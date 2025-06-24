@@ -6,7 +6,8 @@ import Customize from "./pages/Customize";
 import Customize2 from "./pages/Customize2";
 import { userdatacontext } from "./context/usercontext";
 import Home from "./pages/Home.jsx";
-
+import axios from "axios";
+axios.defaults.withCredentials = true;
 function App() {
 
   const { userdata , selectedimage } = useContext(userdatacontext);

@@ -11,4 +11,5 @@ export default defineConfig({
       usePolling: true // Helpful for some file systems (like Docker/WSL)
     }
   },
+  base: './',
 })
