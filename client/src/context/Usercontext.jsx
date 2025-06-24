@@ -3,7 +3,10 @@ import React, { createContext, useEffect, useState  } from 'react'
 // import axios from "axios"
 export  const userdatacontext=createContext({});
 const Usercontext = ({children}) => {
-  const serverurl="http://localhost:7001";
+  // const serverurl="http://localhost:7001";
+  const serverurl = import.meta.env.VITE_serverurl;
+  console.log(serverurl,"this is the server url");
+  // const serverurl="https://ai-assistant-server-9rc7.onrender.com/";
   const [userdata , setuserdata]= useState(null);
   const [selectedimg , setselectedimg]=useState(null);
    const [frontendimg ,setFrontendimg]= useState(null);
@@ -28,7 +31,8 @@ const Usercontext = ({children}) => {
      //  const queryasked="who are you";
 
       try {
-            let result=await  axios.post(`${serverurl}/command/` , {query:query}, {withCredentials:true});
+            console.log("serverurl in usercontext is: " , serverurl);
+            let result=await  axios.post(`${serverurl}/command` ,{query:query}, {withCredentials:true});
             console.log("result in the frontend came" , result);
             return result;
       } catch (error) {
@@ -37,7 +41,7 @@ const Usercontext = ({children}) => {
     }
     
     const value={
-        serverurl:"http://localhost:7001", 
+        serverurl:import.meta.env.VITE_serverurl,
         userdata, setuserdata , frontendimg , setFrontendimg, backendimg , setBackendimg , 
         selectedimg , setselectedimg , 
         selectedname , setselectedname ,

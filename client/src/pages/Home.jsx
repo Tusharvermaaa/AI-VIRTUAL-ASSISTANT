@@ -107,7 +107,9 @@ useEffect(() => {
        case "calculator_open":
        window.open("https://www.google.com/search?q=calculator", "_blank");
        break;
-
+ case "youtube_open":
+      window.open("https://www.youtube.com", "_blank");
+      break;
     case "instagram_open":
       window.open("https://www.instagram.com", "_blank");
       break;

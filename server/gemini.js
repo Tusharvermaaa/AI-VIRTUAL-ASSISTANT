@@ -11,7 +11,7 @@ Always respond in this exact format:
 {
   "type": "general" | "google_search" | "youtube_search" | "youtube_play" |
            "get_time" | "get_date" | "get_day" | "get_month" |
-           "calculator_open" | "instagram_open" | "facebook_open" | "weather_show",
+           "calculator_open" | "instagram_open" | "facebook_open" | "youtube_open" | "weather_show",
   "userinput": "<cleaned input (remove your assistant name and unnecessary fillers)>",
   "response": "<a short, natural voice-style response — up to 2–3 lines max>"
 }

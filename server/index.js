@@ -20,12 +20,25 @@ dotenv.config();
 
 const app = express();
 app.use(cookieParser());
+// toremove --
+app.use(
+  session({
+    secret: "secretkey",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "lax",   // ✅ allow sending cookies from localhost
+      secure: false      // ✅ allow HTTP not HTTPS
+    }
+  })
+);
+//  toremove ---
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
 }));
 app.use((req, res, next)=>{
-  // console.log(req.cookies , " are cookies in res ");
+  console.log(req.cookies , " are cookies in res ");
   next();
 })
 app.use(express.static(path.join(__dirname, "public"))); // to configure the public folder 
