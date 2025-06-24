@@ -45,7 +45,9 @@ try {
         return res.json({  type , userInput , response: `current time is ${now.format("hh:mm:ss A")}` });
         break;
       case "get_date":
-        return res.json({ type , userInput ,respones: `today date is : ${now.format("YYYY-MM-DD")}` });
+
+        console.log("date today called");
+        return res.json({ type , userInput ,respones: `today date is ${now.format("YYYY-MM-DD")}` });
         break;
       case "get_day":
         const dayMap = {
