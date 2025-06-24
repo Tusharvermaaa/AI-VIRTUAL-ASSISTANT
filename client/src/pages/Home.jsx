@@ -102,7 +102,7 @@ useEffect(() => {
 //  handling external commands 
  const handleExternalCommand=(gemres)=>{
     console.log(gemres);
-    const {type , userinput }= gemres;
+    const {type , userInput }= gemres;
      switch(type){
        case "calculator_open":
        window.open("https://www.google.com/search?q=calculator", "_blank");
@@ -118,24 +118,21 @@ useEffect(() => {
 
     case "weather_show":
       // Optional: You can use navigator.geolocation and search weather for that city
-      window.open(`https://www.google.com/search?q=weather+${encodeURIComponent(userinput)}`, "_blank");
+      window.open(`https://www.google.com/search?q=weather+${encodeURIComponent(userInput)}`, "_blank");
       break;
 
     case "google_search":
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(userinput)}`, "_blank");
+      window.open(`https://www.google.com/search?q=${encodeURIComponent(userInput)}`, "_blank");
       break;
 
     case "youtube_search":
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userinput)}`, "_blank");
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userInput)}`, "_blank");
       break;
 
     case "youtube_play":
       // Tries to play the first matching video (if YouTube search redirects to video)
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userinput)}`, "_blank");
+      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userInput)}`, "_blank");
       break;
-
-    default:
-      console.log("Unknown command type:", type);
   }
  }
 
