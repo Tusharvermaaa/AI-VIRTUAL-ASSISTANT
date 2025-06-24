@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
-import bgimg from "../assets/authBg.png";
+// import bgimg from "../assets/authBg.png";
+import  bgimg from "../assets/tbg3.avif"
+// import bgimg from "../assets/tbg.avif"
 import { TbMoodLookLeft } from "react-icons/tb";
 import { TbMoodLookRight } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +33,7 @@ const Signin = () => {
   return (
     <div
       className="w-full h-[100vh] bg-cover flex justify-center items-center"
-      style={{ backgroundImage: `url(${bgimg})` }}
+      style={{ backgroundImage: `url(${bgimg})`  }}
     >
       <form
         className="w-[90%] h-[600px] max-w-[500px] backdrop-blur-sm flex items-center justify-center gap-[20px] bg-[#00000069] flex-col shadow-2xl shadow-black"
@@ -81,7 +83,7 @@ const Signin = () => {
         >
           Sign-up
         </button>
-        <p className="text-[15px]">
+        <p className="text-[15px] text-[white]">
           don't have an account?{" "}
           <span
             className="text-[#c2c2fa] cursor-pointer font-bold"

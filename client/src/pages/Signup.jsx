@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TbMoodLookLeft } from "react-icons/tb";
 import { TbMoodLookRight } from "react-icons/tb";
-import bgimg from "../assets/authBg.png";
+import bgimg from "../assets/tbg3.avif";
 import {  useNavigate } from "react-router-dom";
 import { userdatacontext } from "../context/usercontext";
 import axios from "axios";
@@ -98,7 +98,7 @@ const Signup = () => {
         >
           Register
         </button>
-        <p>already have an account ?<span onClick={()=>{navigate("/signin")}} className="text-[#c2c2fa] text-xl">signin here</span></p>
+        <p className="text-[white]">already have an account ?<span onClick={()=>{navigate("/signin")}} className="text-[#c2c2fa] text-xl">signin here</span></p>
       </form>
     </div>
   );

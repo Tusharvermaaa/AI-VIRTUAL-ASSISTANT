@@ -130,8 +130,13 @@ useEffect(() => {
   utterance.volume = 1;     // Volume (0 to 1)
 
   // Optional: Choose a specific voice
-  // const voices = window.speechSynthesis.getVoices();
-  // utterance.voice = voices.find(voice => voice.name.includes("Google")); // example
+//   const voices = window.speechSynthesis.getVoices();
+//   console.log(voices,"are voices");
+//    let selectedvoice = voices.find(voice => voice.name.includes("Heera")); // example
+// if(selectedvoice){
+//   utterance.voice=selectedvoice;
+// }
+
 
   window.speechSynthesis.speak(utterance); 
  }
