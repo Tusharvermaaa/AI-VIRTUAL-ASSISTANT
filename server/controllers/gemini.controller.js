@@ -13,14 +13,11 @@ const geminicontroller = async (req, res) => {
     const assistantname = user.assistantname;
 
     const result = await geminiresponse(prompt, assistantname, username);
-    console.log("GEMINI RAW RESPONSE:", result); // 🔍 LOG THIS
-    const cleaned = result
-  .replace(/```json|```/g, "")
-  .trim()
-  .replace(/\n{2,}/g, "\n");
+    // console.log("GEMINI RAW RESPONSE:", result); // 🔍 LOG THIS
+    const cleaned = result?.replace(/```json|```/g, "")?.trim()?.replace(/\n{2,}/g, "\n");
 
-    console.log("type of cleanded",typeof cleaned );
-    console.log("cleaned" , cleaned )
+    // console.log("type of cleanded",typeof cleaned );
+    // console.log("cleaned" , cleaned )
 let geminiresult;
 try {
   geminiresult = JSON.parse(cleaned);

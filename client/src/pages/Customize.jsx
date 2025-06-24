@@ -8,11 +8,12 @@ import Card from "../components/Card";
 // import img5 from "../assets/image5.png";
 // import img6 from "../assets/image6.jpeg";
 import img1 from "../assets/tai6.avif";
-import img2 from "../assets/tai7.avif";
-import img3 from "../assets/tai9.avif";
+import img2 from "../assets/tai5.jpg";
+import img5 from "../assets/image7.jpeg";
 import img4 from "../assets/tai4.jpg";
-import img5 from "../assets/tai8.avif";
+import img3 from "../assets/tai8.avif";
 import img6 from "../assets/image6.jpeg";
+// import img7 from "../assets/"
 import { useRef } from "react";
 import { useContext } from "react";
 import { userdatacontext } from "../context/usercontext";
