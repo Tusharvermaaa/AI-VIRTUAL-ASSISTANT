@@ -19,8 +19,8 @@ export async function signup_auth(req, res)
 //    console.log("token created at authentication and type " , token , typeof token)
     // console.log("created user id , in signup .jsx in controller " , createduser._id);
    res.cookie("token" , token , {
-    sameSite:"strict" , 
-    secure: false, 
+    sameSite:"none" , 
+    secure: true, 
     httpOnly:true,
     maxAge:4*24*60*60*1000
    })
