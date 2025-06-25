@@ -3,7 +3,7 @@ import { TbMoodLookLeft } from "react-icons/tb";
 import { TbMoodLookRight } from "react-icons/tb";
 import bgimg from "../assets/tbg3.avif";
 import {  useNavigate } from "react-router-dom";
-import { userdatacontext } from "../context/usercontext";
+import { userdatacontext } from "../context/usercontext.jsx";
 import axios from "axios";
 const Signup = () => {
      

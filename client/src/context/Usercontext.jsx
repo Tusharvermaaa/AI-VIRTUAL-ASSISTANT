@@ -3,8 +3,9 @@ import React, { createContext, useEffect, useState  } from 'react'
 // import axios from "axios"
 export  const userdatacontext=createContext({});
 const Usercontext = ({children}) => {
-  // const serverurl="http://localhost:7001";
-  const serverurl = import.meta.env.VITE_serverurl;
+
+  const serverurl="http://localhost:7001";
+  // const serverurl = import.meta.env.VITE_serverurl;
   console.log(serverurl,"this is the server url");
   // const serverurl="https://ai-assistant-server-9rc7.onrender.com/";
   const [userdata , setuserdata]= useState(null);
@@ -41,7 +42,8 @@ const Usercontext = ({children}) => {
     }
     
     const value={
-        serverurl:import.meta.env.VITE_serverurl,
+        // serverurl:import.meta.env.VITE_serverurl,
+        serverurl,
         userdata, setuserdata , frontendimg , setFrontendimg, backendimg , setBackendimg , 
         selectedimg , setselectedimg , 
         selectedname , setselectedname ,
