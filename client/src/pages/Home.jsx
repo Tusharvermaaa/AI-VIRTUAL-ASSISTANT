@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { userdatacontext } from "../context/usercontext";
+import { userdatacontext } from "../context/Usercontext";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
-
   const [GeminiOutput, setGeminiOutput] = useState(null);
   const [listen, setlisten] = useState("hello");
   const { serverurl, getTextresponse, userdata } = useContext(userdatacontext);
@@ -26,108 +25,128 @@ const Home = () => {
     } catch (error) {
       console.log("logout error ", error);
     }
-  }
+  };
   // // // calling gettextresponse code
-  // // // speak and handle command external which is extenal 
+  // // // speak and handle command external which is extenal
   useEffect(() => {
     const fetchGeminiResponse = async () => {
       console.log("taking", listen);
       const res = await getTextresponse(listen);
       if (res?.data?.response) {
-          speak(res.data.response);
-          setGeminiOutput(res.data.response); // save the assistant's voice-style response
-          handleExternalCommand(res.data);
+        speak(res.data.response);
+        setGeminiOutput(res.data.response); // save the assistant's voice-style response
+        handleExternalCommand(res.data);
       }
     };
     if (userdata) {
       fetchGeminiResponse();
     }
-  }, [ userdata , listen ]); 
-// setting up speech recognition with webspeech api
-useEffect(() => {
-  const SpeechRecognize = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognize || !userdata?.assistantname) return;
+  }, [userdata, listen]);
+  // setting up speech recognition with webspeech api
+  useEffect(() => {
+    const SpeechRecognize =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognize || !userdata?.assistantname) return;
 
-  const recognition = new SpeechRecognize();
-  recognition.continuous = true;
-  recognition.lang = 'en-US';
-  recognition.interimResults = false;
-  let stoppedManually = false;
+    const recognition = new SpeechRecognize();
+    recognition.continuous = true;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    let stoppedManually = false;
 
-  recognition.onresult = (event) => {
-    const transcript = event.results[event.results.length - 1][0].transcript;
-    if (transcript.toLowerCase().includes(userdata.assistantname.toLowerCase())) {
-      setlisten(transcript);
+    recognition.onresult = (event) => {
+      const transcript = event.results[event.results.length - 1][0].transcript;
+      if (
+        transcript.toLowerCase().includes(userdata.assistantname.toLowerCase())
+      ) {
+        setlisten(transcript);
+      }
+    };
+
+    recognition.onend = () => {
+      if (!stoppedManually) {
+        console.log("Speech recognition stopped. Restarting...");
+        recognition.start(); // auto-restart
+      }
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+    };
+    recognition.start();
+
+    // cleanup
+    return () => {
+      stoppedManually = true;
+      recognition.stop();
+    };
+  }, [userdata]);
+  // sepak function for ai assitant
+  const speak = (text) => {
+    if (!window.speechSynthesis) {
+      console.error("Speech synthesis not supported in this browser.");
+      return;
     }
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US"; // You can change to 'hi-IN', 'en-UK', etc.
+    utterance.rate = 1; // Speed (0.1 to 10)
+    utterance.pitch = 1; // Pitch (0 to 2)
+    utterance.volume = 1; // Volume (0 to 1)
+    window.speechSynthesis.speak(utterance);
+    //   const voices = window.speechSynthesis.getVoices(); console.log(voices,"are voices");
+    //    let selectedvoice = voices.find(voice => voice.name.includes("Heera")); // example
+    // if(selectedvoice){  utterance.voice=selectedvoice;  }
   };
-
-  recognition.onend = () => {
-    if (!stoppedManually) {
-      console.log("Speech recognition stopped. Restarting...");
-      recognition.start(); // auto-restart
-    }
-  };
-
-  recognition.onerror = (event) => {
-    console.error("Speech recognition error:", event.error);
-  };
-  recognition.start();
-
-  // cleanup
-  return () => {
-    stoppedManually = true;
-    recognition.stop();
-  };
-}, [userdata]);
-// sepak function for ai assitant 
- const speak=(text)=>{
-
-     if (!window.speechSynthesis) {
-    console.error("Speech synthesis not supported in this browser.");
-    return;
-     }
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US'; // You can change to 'hi-IN', 'en-UK', etc.
-  utterance.rate = 1;       // Speed (0.1 to 10)
-  utterance.pitch = 1;      // Pitch (0 to 2)
-  utterance.volume = 1;     // Volume (0 to 1)
-  window.speechSynthesis.speak(utterance); 
-//   const voices = window.speechSynthesis.getVoices(); console.log(voices,"are voices");
-//    let selectedvoice = voices.find(voice => voice.name.includes("Heera")); // example
-// if(selectedvoice){  utterance.voice=selectedvoice;  }
- }
-//  handling external commands 
- const handleExternalCommand=(gemres)=>{
+  //  handling external commands
+  const handleExternalCommand = (gemres) => {
     console.log(gemres);
-    const {type , userInput }= gemres;
-     switch(type){
-       case "calculator_open":
-       window.open("https://www.google.com/search?q=calculator", "_blank");
-       break;
- case "youtube_open":
-      window.open("https://www.youtube.com", "_blank");
-      break;
-    case "instagram_open":
-      window.open("https://www.instagram.com", "_blank");
-      break;
-    case "facebook_open":
-      window.open("https://www.facebook.com", "_blank");
-      break;
-    case "weather_show":
-      window.open(`https://www.google.com/search?q=weather+${encodeURIComponent(userInput)}`, "_blank");
-      break;
-    case "google_search":
-      window.open(`https://www.google.com/search?q=${encodeURIComponent(userInput)}`, "_blank");
-      break;
-    case "youtube_search":
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userInput)}`, "_blank");
-      break;
-    case "youtube_play":
-      // Tries to play the first matching video (if YouTube search redirects to video)
-      window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(userInput)}`, "_blank");
-      break;
-  }
- }
+    const { type, userInput } = gemres;
+    switch (type) {
+      case "calculator_open":
+        window.open("https://www.google.com/search?q=calculator", "_blank");
+        break;
+      case "youtube_open":
+        window.open("https://www.youtube.com", "_blank");
+        break;
+      case "instagram_open":
+        window.open("https://www.instagram.com", "_blank");
+        break;
+      case "facebook_open":
+        window.open("https://www.facebook.com", "_blank");
+        break;
+      case "weather_show":
+        window.open(
+          `https://www.google.com/search?q=weather+${encodeURIComponent(
+            userInput
+          )}`,
+          "_blank"
+        );
+        break;
+      case "google_search":
+        window.open(
+          `https://www.google.com/search?q=${encodeURIComponent(userInput)}`,
+          "_blank"
+        );
+        break;
+      case "youtube_search":
+        window.open(
+          `https://www.youtube.com/results?search_query=${encodeURIComponent(
+            userInput
+          )}`,
+          "_blank"
+        );
+        break;
+      case "youtube_play":
+        // Tries to play the first matching video (if YouTube search redirects to video)
+        window.open(
+          `https://www.youtube.com/results?search_query=${encodeURIComponent(
+            userInput
+          )}`,
+          "_blank"
+        );
+        break;
+    }
+  };
 
   return (
     <div className="w-full h-[100vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
@@ -279,7 +298,7 @@ export default Home;
 //   //     console.log(errormsg);
 //   //   };
 //   // }, [listen]);
-// // sepak function for ai assitant 
+// // sepak function for ai assitant
 //  const speak=(text)=>{
 
 //      if (!window.speechSynthesis) {
@@ -301,8 +320,7 @@ export default Home;
 // //   utterance.voice=selectedvoice;
 // // }
 
-
-//   window.speechSynthesis.speak(utterance); 
+//   window.speechSynthesis.speak(utterance);
 //  }
 //   return (
 //     <div className="w-full h-[100vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
@@ -336,4 +354,3 @@ export default Home;
 // };
 
 // export default Home;
-

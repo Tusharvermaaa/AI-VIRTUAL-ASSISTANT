@@ -16,19 +16,23 @@ import img6 from "../assets/image6.jpeg";
 // import img7 from "../assets/"
 import { useRef } from "react";
 import { useContext } from "react";
-import { userdatacontext } from "../context/usercontext";
+import { userdatacontext } from "../context/Usercontext";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 // import img2 from "../assets/image2.jpg"
 // import img2 from "../assets/image2.jpg"
 
 function Customize() {
-
-  const { selectedimg,setselectedimg, frontendimg, setFrontendimg, setBackendimg } =
-    useContext(userdatacontext);
-    const navigate =useNavigate();
+  const {
+    selectedimg,
+    setselectedimg,
+    frontendimg,
+    setFrontendimg,
+    setBackendimg,
+  } = useContext(userdatacontext);
+  const navigate = useNavigate();
   const inputImg = useRef();
-  
+
   const handlefileinput = (e) => {
     const file = e.target.files[0];
     setBackendimg(file);
@@ -40,7 +44,10 @@ function Customize() {
 
   return (
     <div className="w-full h-[100vh] bg-gradient-to-t from-[#070707] to-[#070752] flex items-center justify-center flex-col">
-    <MdOutlineArrowBackIosNew className="font-bold text-2xl text-[white]  cursor-pointer absolute top-15  left-15  "  onClick={()=>navigate("/")} />
+      <MdOutlineArrowBackIosNew
+        className="font-bold text-2xl text-[white]  cursor-pointer absolute top-15  left-15  "
+        onClick={() => navigate("/")}
+      />
       <h1 className="text-[white] font-bold p-[5px] m-[30px] text-2xl">
         Select <span className="text-blue-400">Avatar</span> of Your{" "}
         <span className="text-blue-400"> Virtual Assistant </span>
@@ -52,12 +59,12 @@ function Customize() {
         <Card image={img4} />
         <Card image={img5} />
         <Card image={img6} />
-    
-      <div
+
+        <div
           onClick={() => {
             inputImg.current.click();
-            setselectedimg("input") 
-             // it is printing previous state cause for current state it will be update and this thing takes time
+            setselectedimg("input");
+            // it is printing previous state cause for current state it will be update and this thing takes time
           }}
           className={`minw-[290px] minh-[220px] border-2 border-[#070765] rounded-2xl overflow-hidden
    hover:shadow-blue-900 
@@ -85,16 +92,16 @@ function Customize() {
         </div>
       </div>
 
-      {
-        (selectedimg )&& (
-          <input
-           onClick={()=>{ navigate("/customize2")}}
-            type="button"
-            className="cursor-pointer font-bold text-[20px] bg-amber-50 rounded-full text-[#06063e] m-[50px] p-[20px] pt-[10px] pb-[10px] hover:shadow-2xl hover:shadow-blue-500 "
-            value="Next"
-          />
-        )
-      }
+      {selectedimg && (
+        <input
+          onClick={() => {
+            navigate("/customize2");
+          }}
+          type="button"
+          className="cursor-pointer font-bold text-[20px] bg-amber-50 rounded-full text-[#06063e] m-[50px] p-[20px] pt-[10px] pb-[10px] hover:shadow-2xl hover:shadow-blue-500 "
+          value="Next"
+        />
+      )}
     </div>
   );
 }
