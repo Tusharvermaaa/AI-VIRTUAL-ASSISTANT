@@ -1,3 +1,5 @@
+![PERFORMANCE MATRICES](./image.png)
+
 # AI Virtual Assistant
 
 A full-stack AI-powered virtual assistant web application built with React (Vite) for the frontend and Node.js/Express/MongoDB for the backend. The app leverages modern authentication, user customization, and integrates with AI APIs for smart responses and voice interaction.
