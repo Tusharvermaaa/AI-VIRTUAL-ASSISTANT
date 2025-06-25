@@ -29,14 +29,14 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      sameSite: "lax",   // ✅ allow sending cookies from localhost
-      secure: false      // ✅ allow HTTP not HTTPS
+      sameSite: "none",   // ✅ allow sending cookies from localhost
+      secure: true      // ✅ allow HTTP not HTTPS
     }
   })
 );
 //  toremove ---
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin:['https://assistant-ai-fz7c.onrender.com', 'http://localhost:4173','http://localhost:5173'],
   credentials: true
 }));
 app.use((req, res, next)=>{

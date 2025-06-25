@@ -18,6 +18,7 @@ Always respond in this exact format:
 
 Instructions:
 - In "userinput", remove your name (e.g., Flaa) and politeness like "please", "can you", only if they don’t change the intent.
+- you should understand the question of user (e.g. flaa search t series youtube channel on youtube ) that means query is (youtube channel ) for type youtube_search 
 - Do not modify the actual request meaning. Keep the core command intact.
 - If user says:  
   "Flaa please open CarryMinati on YouTube"  
